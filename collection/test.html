@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Factory Pattern & Constructor Pattern</title>
+</head>
+<body>
+<script>
+    /**
+     * 工厂模式创造对象
+     * @param name
+     * @param age
+     * @param job
+     */
+    function createPerson(name,age,job){
+        var o=new Object();
+        o.name=name;
+        o.age=age;
+        o.job=job;
+        o.sayName=function(){
+            alert(this.name);
+        };
+
+        return o;
+    }
+    /**
+     * 构造函数模式创造对象
+     * @param name
+     * @param age
+     * @param job
+     * @constructor
+     */
+    function Person(name,age,job){
+        this.name=name;
+        this.age=age;
+        this.job=job;
+        this.sayName=function(){
+            alert(this.name);
+        };
+    }
+
+
+    var person1=createPerson("chet1",241,"soft1");
+    var person2=createPerson("chet2",242,"soft2");
+    var person3=new createPerson("chet3",243,"soft3");
+    alert(person1 instanceof Object);//true
+    alert(person1 instanceof createPerson);//false
+    alert(person3 instanceof Object);//true
+    alert(person3 instanceof createPerson);//false
+    console.log(person3);//Object {name: "chet3", age: 243, job: "soft3"}
+
+    var person5=new Person("chet5",245,"soft5");
+    alert(person5 instanceof Object);//true
+    alert(person5 instanceof Person);//true
+    console.log(person5);//Person {name: "chet5", age: 245, job: "soft5"}
+    //作为普通函数调用
+    Person("Greg",27,"Doctor");
+    window.sayName();//Greg
+    //在另一个对象的作用域中调用
+    var o=new Object();
+    Person.call(o,"Kristen",25,"Nurse");
+    o.sayName();//Kristen
+
+    //虽然两种方式混用问题也不大，JavaScript本来的包容性就比较大，
+    // 不过还是建议两种模式分开来用，不要混用，省得出现你掌控不了的错误
+</script>
+
+</body>
+</html>
