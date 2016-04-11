@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //    function callerDemo() {
+    //        document.writeln(callerDemo.caller);
+    //        if (callerDemo.caller) {
+    //            var a= callerDemo.caller.toString();
+    //            alert(a);
+    //        } else {
+    //            alert("this is a top function");
+    //        }
+    //    }
+    //    callerDemo();
+    //    function handleCaller() {
+    //        callerDemo();
+    //    }
+
+    //    handleCaller();
+    var Class = {
+        create: function () {
+            return function () {
+                console.log(this);
+                this.initialize.apply(this, arguments);
+            }
+        }
+    }
+    var vehicle = Class.create();
+//    var vehicle= function () {
+//        console.log(this);
+//        this.initialize.apply(this, arguments);
+//    }
+    vehicle.prototype = {
+        initialize: function (type) {
+            this.type = type;
+        },
+        showSelf: function () {
+            alert("this vehicle is " + this.type);
+        }
+    };
+    var moto = new vehicle("Moto");
+    console.log(moto);
+    moto.showSelf();
+</script>
+
+</body>
+</html>
