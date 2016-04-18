@@ -23,9 +23,8 @@ var test={
     a:1,
     init: function () {
         var me=this;
+        me.render();
         me.bind();
-        me.render();
-        me.render();
     },
     render: function () {
         var me=this;
